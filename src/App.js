@@ -2,58 +2,28 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
-
-
-
+  const [text, setText] = useState("");
   const [tasks, setTasks] = useState([
     { label: "Learn HTML" },
     { label: "Learn CSS" },
     { label: "Learn JS" },
 
   ]);
-  //same thing
-  // const myState = useState([
-  //   { label: "Learn HTML" }, 
-  //   { label: "Learn CSS" }, 
-  //   { label: "Learn JS"},
 
-  // const tasks = myState[0];
-  // const setTasks = myState[1];
-
-  // const taskElements= [
-  //   <li>
-  //   <span className='Label'>Learn HTML</span> 
-  //   </li>,
-  //   <li>
-  //   <span className='Trashcan'>Learn CSS</span>
-  //   </li>,
-  // ];
-  //update it for the better:
+    console.log("app() running", text )
 
   const taskElements = tasks.map(task => {
     return (
       <li key={task.label}>
         <span className='label'>{task.label}</span>
       </li>
-
     );
   });
 
   const onclickOk = () => {
-
-    // tasks.push({
-    //   label:"new task!",
-    // });
-
-    // const updatedTasks = tasks.concat();
-    // updatedTasks.push({
-    //   label: "New tasks"
-    // });
-    // setTasks(updatedTasks);
-
     setTasks([
       ...tasks, {
-        label: "New task"
+        label: text,
       },
     ]);
   };
@@ -63,7 +33,9 @@ function App() {
       <div className='container'>
         <h1>TODO</h1>
         <p className='counter'>0 completed</p>
-        <input type='text'></input>
+        <input type='text'
+          value={text}
+          onChange={(event) => setText(event.target.value)}/>
         <button onClick={onclickOk}>OK</button>
         <small className='error' />
         <ul>
