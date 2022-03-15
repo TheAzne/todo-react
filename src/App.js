@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [text, setText] = useState("");
@@ -7,7 +7,6 @@ function App() {
     { completed: false, label: "Learn HTML" },
     { completed: false, label: "Learn CSS" },
     { completed: false, label: "Learn JS" },
-
   ]);
 
   const taskElements = tasks.map((task, index) => {
@@ -26,43 +25,46 @@ function App() {
       setTasks(tasks.filter((taskToFilter) => taskToFilter !== task));
     };
 
-return (
-  <li key={task.label} className={task.completed ? "completed": null}>
-    <span className='label' onClick={onClickTask}>{task.label}</span>
-  </li>
-);
+    return (
+      <li key={task.label} className={task.completed ? "completed" : null}>
+        <span className="label" onClick={onClickTask}>
+          {task.label}
+        </span>
+        <span className="trashcan" onClick={onClickTrashcan}>
+          🗑
+        </span>
+      </li>
+    );
   });
 
-const onclickOk = () => {
-  setText("");
-  setTasks([
-    ...tasks, {
-      label: text,
-    },
-  ]);
-};
+  const onClickOk = () => {
+    setText("");
+    setTasks([
+      ...tasks,
+      {
+        label: text,
+      },
+    ]);
+  };
 
-const onTextChange = (event) => {
-  setText(event.target.value);
-};
+  const onTextChange = (event) => {
+    setText(event.target.value);
+  };
 
+  const completedCount = tasks.filter((task) => task.completed).length;
 
-return (
-  <div className="App">
-    <div className='container'>
-      <h1>TODO</h1>
-      <p className='counter'>0 completed</p>
-      <input type='text'
-        value={text}
-        onChange={onTextChange} />
-      <button onClick={onclickOk}>OK</button>
-      <small className='error' />
-      <ul>
-        {taskElements}
-      </ul>
+  return (
+    <div className="App">
+      <div className="container">
+        <h1>My ToDo</h1>
+        <p className="counter">{completedCount} completed</p>
+        <input type="text" value={text} onChange={onTextChange} />
+        <button onClick={onClickOk}>OK</button>
+        <small className="error"></small>
+        <ul>{taskElements}</ul>
+      </div>
     </div>
-  </div>
-);
+  );
 }
 
 export default App;
