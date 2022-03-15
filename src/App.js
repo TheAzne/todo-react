@@ -10,7 +10,6 @@ function App() {
 
   ]);
 
-    console.log("app() running", text )
 
   const taskElements = tasks.map(task => {
     return (
@@ -21,6 +20,7 @@ function App() {
   });
 
   const onclickOk = () => {
+    setText("");
     setTasks([
       ...tasks, {
         label: text,
@@ -28,6 +28,11 @@ function App() {
     ]);
   };
 
+  const onTextChange = (event)=>{
+    setText(event.target.value);
+  };
+
+  
   return (
     <div className="App">
       <div className='container'>
@@ -35,7 +40,7 @@ function App() {
         <p className='counter'>0 completed</p>
         <input type='text'
           value={text}
-          onChange={(event) => setText(event.target.value)}/>
+          onChange={onTextChange} />
         <button onClick={onclickOk}>OK</button>
         <small className='error' />
         <ul>
